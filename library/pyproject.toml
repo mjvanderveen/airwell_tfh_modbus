@@ -58,13 +58,18 @@ line-length = 100
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-  "D203", # one-blank-line-before-class: conflicts with D211
-  "D212", # multi-line-summary-first-line: conflicts with D213
+  "D203",   # one-blank-line-before-class: conflicts with D211
+  "D212",   # multi-line-summary-first-line: pick D213 style below
+  "D213",   # multi-line-summary-second-line: code uses first-line summaries
   "COM812", # trailing-comma-missing: conflicts with the formatter
+  "CPY001", # missing-copyright-notice: not required for this project
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101", "D103", "ANN001", "ANN201"]
+"tests/**" = ["S101", "D103", "D401", "ANN001", "ANN201", "INP001", "PLR2004"]
+"script/**" = ["INP001", "T201"]
+# Package-internal relative imports keep the library import-portable.
+"src/**" = ["TID252"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

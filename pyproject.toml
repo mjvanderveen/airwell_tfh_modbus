@@ -8,10 +8,15 @@ extend-exclude = ["library", "core-integration-draft"]
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-  "D203",
-  "D212",
-  "COM812",
+  "D203",   # one-blank-line-before-class: conflicts with D211
+  "D212",   # multi-line-summary-first-line: pick D213 style below
+  "D213",   # multi-line-summary-second-line: code uses first-line summaries
+  "COM812", # trailing-comma-missing: conflicts with the formatter
+  "CPY001", # missing-copyright-notice: not used in Home Assistant integrations
+  "ANN401", # any-type: **kwargs: Any is the standard Home Assistant idiom
+  "FBT003", # boolean-positional-value: register values are data, not flags
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"custom_components/airwell_tfh/airwell_tfh_modbus/**" = ["D401"]
+# The vendored library keeps its own relative imports so it stays portable.
+"custom_components/airwell_tfh/airwell_tfh_modbus/**" = ["D401", "TID252"]

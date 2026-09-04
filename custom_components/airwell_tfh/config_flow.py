@@ -5,12 +5,11 @@ from __future__ import annotations
 from typing import Any
 
 import voluptuous as vol
-from modbus_connection import ModbusError, ModbusTcpParams
-from modbus_connection.tmodbus import ModbusConnection
-
 from homeassistant import config_entries
 from homeassistant.const import CONF_HOST, CONF_PORT
 from homeassistant.helpers import selector
+from modbus_connection import ModbusError, ModbusTcpParams
+from modbus_connection.tmodbus import ModbusConnection
 
 from .airwell_tfh_modbus import AirwellTFH
 from .const import CONF_UNIT_ID, DEFAULT_PORT, DEFAULT_UNIT_ID, DOMAIN, LOGGER

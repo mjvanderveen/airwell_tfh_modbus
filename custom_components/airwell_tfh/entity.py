@@ -33,9 +33,7 @@ class AirwellTFHEntity(CoordinatorEntity[AirwellTFHDataUpdateCoordinator]):
             manufacturer=info.manufacturer,
             model=info.model,
             name=info.model,
-            sw_version=(
-                str(info.software_version) if info.software_version is not None else None
-            ),
+            sw_version=(str(info.software_version) if info.software_version is not None else None),
         )
 
     @property

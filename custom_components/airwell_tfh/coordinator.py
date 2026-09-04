@@ -5,9 +5,8 @@ from __future__ import annotations
 from datetime import timedelta
 from typing import TYPE_CHECKING, Any
 
-from modbus_connection import ModbusError
-
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from modbus_connection import ModbusError
 
 from .const import DOMAIN, LOGGER
 

@@ -16,9 +16,10 @@ from __future__ import annotations
 import argparse
 import asyncio
 
-from airwell_tfh_modbus import AirwellTFH
 from modbus_connection import ModbusSerialParams, ModbusTcpParams
 from modbus_connection.tmodbus import ModbusConnection
+
+from airwell_tfh_modbus import AirwellTFH
 
 
 def _parse_args() -> argparse.Namespace:
@@ -53,8 +54,13 @@ async def main() -> None:
         print(f"Firmware code: {device.info.software_version}")
         print()
         print("Sensors:")
-        for name in ("water_tank_temperature", "defrost_temperature", "ambient_temperature",
-                      "exhaust_temperature", "return_gas_temperature"):
+        for name in (
+            "water_tank_temperature",
+            "defrost_temperature",
+            "ambient_temperature",
+            "exhaust_temperature",
+            "return_gas_temperature",
+        ):
             print(f"  {name}: {getattr(device.sensors, name)}")
         print("Relays:")
         for name in ("compressor", "electric_heater", "four_way_valve", "fan"):
@@ -63,8 +69,13 @@ async def main() -> None:
         for name in ("high_pressure", "low_pressure", "condensation"):
             print(f"  {name}: {getattr(device.alarms, name)}")
         print("Controller:")
-        for name in ("controller_status", "alarm_register_1", "alarm_register_2",
-                      "operation_mode", "eev_opening"):
+        for name in (
+            "controller_status",
+            "alarm_register_1",
+            "alarm_register_2",
+            "operation_mode",
+            "eev_opening",
+        ):
             print(f"  {name}: {getattr(device.controller, name)}")
     finally:
         await connection.close()

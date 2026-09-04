@@ -16,11 +16,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from modbus_connection import ModbusTcpParams
-from modbus_connection.tmodbus import ModbusConnection
-
 from homeassistant.const import CONF_HOST, CONF_PORT, Platform
 from homeassistant.loader import async_get_loaded_integration
+from modbus_connection import ModbusTcpParams
+from modbus_connection.tmodbus import ModbusConnection
 
 from .airwell_tfh_modbus import AirwellTFH
 from .const import CONF_UNIT_ID
