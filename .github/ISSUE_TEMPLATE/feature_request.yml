@@ -1,0 +1,10 @@
+name: Feature request
+description: Suggest an idea for the Airwell TFH integration
+labels: [enhancement]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the feature
+    validations:
+      required: true

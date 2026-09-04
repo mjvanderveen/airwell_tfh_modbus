@@ -1,0 +1,10 @@
+{
+  "name": "Airwell TFH dev",
+  "image": "ghcr.io/home-assistant/devcontainer:2.0-python3.13",
+  "postCreateCommand": "scripts/setup",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-python.python", "charliermarsh.ruff"]
+    }
+  }
+}

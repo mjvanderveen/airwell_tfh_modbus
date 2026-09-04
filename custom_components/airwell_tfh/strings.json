@@ -1,0 +1,68 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "Enter the Modbus TCP / RTU-over-TCP gateway address for your Airwell TFH controller.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "unit_id": "Modbus unit"
+        },
+        "data_description": {
+          "host": "The IP address or hostname of the Modbus TCP gateway.",
+          "port": "The TCP port of the Modbus gateway (default: 502).",
+          "unit_id": "The controller's Modbus station/slave address (default: 1)."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect. Check the host, port and unit id."
+    },
+    "abort": {
+      "already_configured": "This controller is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "controller_status": {
+        "state": {
+          "power_off": "Power off",
+          "standby": "Standby",
+          "preheating": "Preheating",
+          "heating": "Heating",
+          "before_defrost": "Before defrost",
+          "defrosting": "Defrosting",
+          "after_defrost": "After defrost",
+          "adding_refrigerant": "Adding refrigerant",
+          "alarm": "Alarm"
+        }
+      },
+      "alarm_register_1": {
+        "state": {
+          "none": "No alarm",
+          "high_pressure": "High pressure",
+          "low_pressure": "Low pressure",
+          "temperature_sensor_fault": "Temperature sensor fault"
+        }
+      },
+      "alarm_register_2": {
+        "state": {
+          "none": "No alarm",
+          "water_tank_sensor_fault": "Water tank sensor fault",
+          "ambient_sensor_fault": "Ambient sensor fault",
+          "defrost_fault": "Defrost fault"
+        }
+      }
+    },
+    "select": {
+      "operation_mode": {
+        "state": {
+          "auto": "Auto",
+          "eco": "Eco",
+          "electric_heater": "Electric heater",
+          "sterilization": "Sterilization"
+        }
+      }
+    }
+  }
+}

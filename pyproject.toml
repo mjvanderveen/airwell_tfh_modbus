@@ -1,0 +1,17 @@
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+# The library has its own nested pyproject.toml; the core-integration draft has
+# none and isn't meant to be enforced by this repo's own lint job.
+extend-exclude = ["library", "core-integration-draft"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "D203",
+  "D212",
+  "COM812",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"custom_components/airwell_tfh/airwell_tfh_modbus/**" = ["D401"]

@@ -1,0 +1,24 @@
+name: Bug report
+description: Report a problem with the Airwell TFH integration
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics / raw register dump
+      description: >-
+        If possible, attach the config entry's diagnostics download, or the
+        output of the device library's async_read_raw() helper.
+  - type: input
+    id: model
+    attributes:
+      label: Controller model
+      placeholder: e.g. TFHA 300L
+    validations:
+      required: true
