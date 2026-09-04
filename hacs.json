@@ -1,5 +1,7 @@
 {
   "name": "Airwell TFH Heat Pump Water Heater",
   "render_readme": true,
-  "homeassistant": "2024.1.0"
+  "homeassistant": "2024.1.0",
+  "zip_release": true,
+  "filename": "airwell_tfh.zip"
 }

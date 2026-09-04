@@ -16,3 +16,5 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
+          # Remove once the airwell_tfh domain is added to home-assistant/brands.
+          ignore: brands
