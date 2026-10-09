@@ -43,7 +43,7 @@ PLATFORMS: list[Platform] = [
 async def async_setup_entry(hass: HomeAssistant, entry: AirwellTFHConfigEntry) -> bool:
     """Set up this integration using UI."""
     connection = ModbusConnection(
-        ModbusTcpParams(host=entry.data[CONF_HOST], port=entry.data[CONF_PORT], framer="rtu"),
+        ModbusTcpParams(host=entry.data[CONF_HOST], port=int(entry.data[CONF_PORT]), framer="rtu"),
     )
     unit = connection.for_unit(int(entry.data[CONF_UNIT_ID]))
     device = AirwellTFH(unit)

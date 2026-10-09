@@ -27,6 +27,12 @@ class AirwellTFHFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         """Handle a flow initialized by the user."""
         _errors: dict[str, str] = {}
         if user_input is not None:
+            # NumberSelector returns floats; modbus-connection requires an int port.
+            user_input = {
+                **user_input,
+                CONF_PORT: int(user_input[CONF_PORT]),
+                CONF_UNIT_ID: int(user_input[CONF_UNIT_ID]),
+            }
             try:
                 model = await self._test_connection(
                     host=user_input[CONF_HOST],
