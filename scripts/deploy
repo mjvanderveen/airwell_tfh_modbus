@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Usage: scripts/deploy [patch|minor|major|X.Y.Z] [commit message]
+# Bumps the manifest version, lints, commits everything, and pushes main plus
+# a vX.Y.Z tag; the Release workflow then publishes the zip HACS installs.
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+MANIFEST="custom_components/airwell_tfh/manifest.json"
+BUMP="${1:-patch}"
+
+die() { echo "error: $*" >&2; exit 1; }
+
+[[ "$(git branch --show-current)" == "main" ]] || die "not on main"
+
+current=$(sed -nE 's/.*"version": "([^"]+)".*/\1/p' "$MANIFEST")
+IFS=. read -r major minor patch <<< "$current"
+case "$BUMP" in
+    patch) version="$major.$minor.$((patch + 1))" ;;
+    minor) version="$major.$((minor + 1)).0" ;;
+    major) version="$((major + 1)).0.0" ;;
+    *) version="$BUMP" ;;
+esac
+[[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || die "invalid version '$version'"
+git rev-parse -q --verify "refs/tags/v$version" >/dev/null && die "tag v$version already exists"
+
+message="${2:-Release v$version}"
+
+bash scripts/lint
+sed -i -E "s/(\"version\": \")[^\"]+/\1$version/" "$MANIFEST"
+
+# autocrlf=input stores LF in the repo even if the working tree has CRLF.
+git -c core.autocrlf=input add -A
+git status --short
+read -rp "Deploy $current -> v$version? [y/N] " answer
+[[ "$answer" == [yY] ]] || { git reset -q; die "aborted (manifest already bumped, revert with: git checkout $MANIFEST)"; }
+
+git commit -m "$message"
+git push origin main
+git tag "v$version"
+git push origin "v$version"
+
+echo "Pushed v$version. The Release workflow will publish it for HACS."
